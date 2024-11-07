@@ -45,6 +45,27 @@ class ArtworkProperties(PropertyGroup):
         min=0.01,
         unit='LENGTH'
     )
+    
+    image: PointerProperty(
+        name="Image",
+        type=bpy.types.Image,
+        description="Image to display on the artwork"
+    )
+    
+    rotation: FloatProperty(
+        name="Rotation",
+        description="Rotation of the artwork around Z-axis",
+        default=0.0,
+        subtype='ANGLE',
+        unit='ROTATION'
+    )
+    
+    elevation: FloatProperty(
+        name="Height",
+        description="Height of artwork from floor",
+        default=1.5,
+        unit='LENGTH'
+    )
 
 class AssetLibrary(PropertyGroup):
     name: StringProperty(name="Library Name")
@@ -73,6 +94,54 @@ class SceneProperties(PropertyGroup):
         default=3.0,
         min=0.1,
         unit='LENGTH'
+    )
+    
+    artwork_placement_mode: EnumProperty(
+        name="Placement Mode",
+        items=[
+            ('FREE', "Free", "Place artwork freely"),
+            ('WALL', "Wall", "Place artwork on walls"),
+            ('FLOOR', "Floor", "Place artwork on floor"),
+        ],
+        default='WALL'
+    )
+    
+    wall_offset: FloatProperty(
+        name="Wall Offset",
+        description="Distance from wall",
+        default=0.05,
+        min=0.0,
+        unit='LENGTH'
+    )
+    
+    artwork_filter: StringProperty(
+        name="Filter",
+        description="Filter artwork list",
+        default=""
+    )
+    
+    show_dimensions: BoolProperty(
+        name="Show Dimensions",
+        description="Show artwork dimensions in list",
+        default=True
+    )
+    
+    show_hidden: BoolProperty(
+        name="Show Hidden",
+        description="Show hidden artworks in list",
+        default=False
+    )
+    
+    auto_align_to_walls: BoolProperty(
+        name="Auto-align to Walls",
+        description="Automatically align artwork to nearby walls",
+        default=True
+    )
+    
+    maintain_aspect_ratio: BoolProperty(
+        name="Keep Aspect Ratio",
+        description="Maintain image aspect ratio when resizing",
+        default=True
     )
 
 class ObjectProperties(PropertyGroup):
